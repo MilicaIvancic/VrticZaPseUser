@@ -1,0 +1,91 @@
+<div [@routerTransition]>
+    <h2 class="text-muted">{{userDetails.firstName}} <small>{{userDetails.surname}}</small></h2>
+    <hr>
+
+    <p-toast position="top-left"></p-toast>
+
+    <div class="col col-sm-14">
+        <div class="card mb-3">
+            <div class="card-header">
+                O {{userDetails.firstName}}
+            </div>
+            <div class="card-body">
+                <ul class="list-group">
+
+                    <li class="list-group-item list-group-item-info">Email: {{userDetails.email}} </li>
+                    <li class="list-group-item list-group-item-success">Prezime: {{userDetails.surname}}</li>
+                    <li class="list-group-item list-group-item-info">Grad: {{userDetails.cityName}} </li>
+                    <li class="list-group-item list-group-item-success">Ulica i broj: {{userDetails.street}}
+                        {{userDetails.streetNumber}}</li>
+                    <li class="list-group-item list-group-item-dark">Datum rodjenja:
+                        {{userDetails.birthDate | date:'dd.MM.y'}}</li>
+                    <li class="list-group-item list-group-item-primary" *ngIf="userDetails.userSex==0"> male</li>
+                    <li class="list-group-item list-group-item-danger" *ngIf="userDetails.userSex==1"> female</li>
+                    <li class="list-group-item list-group-item-info" *ngIf="userDetails.phoneNumbers!= ''">
+                        <ul>
+                            <li *ngFor="let x of userDetails.phoneNumbers"> mobilni: {{x}} </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="col col-sm-14" *ngIf="userDetails.dogNames != ''">
+        <div class="card mb-3">
+            <div class="card-header">
+                Moji psi
+            </div>
+            <div class="card-body">
+                <table class="table table-hover">
+
+                    <tr *ngFor="let x of userDetails.dogNames">
+                        <td>{{x.name}}</td>
+
+                        <td *ngIf="x.isActive == true ">
+                            <button pButton type="button" label="details" class="btn btn-default btn-sm"
+                                (click)="details(x.id)"> detalji </button>
+
+                        </td>
+                        <td *ngIf="x.isActive == false ">
+                            <button pButton type="button" label="details" class="btn btn-default btn-sm"
+                                (click)="upisiPsa(x.id)"> Upisite psa u vrtic </button>
+                        </td>
+                        
+                    </tr>
+                    
+                </table>
+            
+            </div>
+            <div class="card-footer">
+                <button pButton type="button" class="btn btn-default btn-sm" (click)="addDog()"> Dodajte psa</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="col col-sm-14" *ngIf="userDetails.dogNames == ''">
+        <div class="card mb-3">
+            <div class="card-header">
+                Psi {{userDetails.firstName}} korisnika
+            </div>
+            <div class="card-body">
+                <button pButton type="button" class="btn btn-default btn-sm" (click)="addDog()"> Dodajte psa</button>
+            </div>
+            <div class="card-footer">
+                {{userDetails.firstName}} jos nije upisao psa u nas vrtic :D
+            </div>
+        </div>
+    </div>
+
+
+    <hr>
+
+
+    <div class="row">
+        <div class="col-md-12">
+
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,34 @@
+<div >
+    <div class="card mb-3">
+        <div class="card-header">
+           <h4> Moji psi </h4>
+        </div>
+    </div>
+  
+    <div class="row">
+       <div class="col-sm" *ngFor="let item of data.results">
+           
+            <div class="col col-sm-14" >
+              <div class="card mb-3">
+                  <div class="card-header">
+                     {{item.name}}
+                  </div>
+                  <div class="card-body">
+                    <p> Datum rođenja: {{item.birthDate | date:'dd.MM.y'}}</p>
+                    <p> Rasa: {{item.race}}</p>
+                    <p *ngIf="item.isActive == true"> Vaspitac psa: {{item.educatorName}}</p>
+                      
+                  </div>
+                   <div class="card-footer" *ngIf="item.isActive == false ">
+                    <button pButton type="button" label="details" class="btn btn-default btn-sm"
+                    (click)="upisiPsa(item.dogId)"> Upisite psa u vrtic </button>
+                  </div>
+                  <div class="card-footer" *ngIf="item.isActive == true ">
+                    <button pButton type="button" label="details" class="btn btn-default btn-sm"
+                    (click)="details(item.dogId)"> detalji </button>
+                  </div> 
+              </div> 
+          </div>
+          </div>  
+    </div>
+</div>

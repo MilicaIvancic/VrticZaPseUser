@@ -1,0 +1,66 @@
+<div class="col col-sm-14">
+    <div class="card mb-3">
+        <div class="card-header">
+           <h4> {{dogDetails.dogName}} </h4> 
+        </div>
+        <div class="card-body">
+          <p> Vaspitac {{dogDetails.educatorName}} &nbsp;
+              <button pButton type="button" label="2" icon="fa fa-ban" (click)="changeEducator(dogDetails.dogId)" >
+                Promenite Vaspitaca </button> </p>
+            <p> {{dogDetails.dogDescription}}</p>
+            <p> Rasa : {{dogDetails.race}} </p>
+            <p> Pas je član vrtića do {{dogDetails.endDate | date:'dd.MM.y'}} , 
+              posle ovog datuma morate ponovo da uplatite mesečni paket.</p>
+            
+        </div>
+        <div class="card-footer">
+            {{dogDetails.chip}}
+        </div>
+    </div>
+</div>
+ <br/> 
+ <hr/>
+<div *ngIf="dogDetails.today > dogDetails.endDate" > 
+
+    <button pButton type="button" label="details" class="btn btn-default btn-sm"
+                                (click)="upisiPsa(x.id)"> Upisite psa u vrtic na narednih mesec dana </button>
+</div>
+
+
+  <div>
+      <button pButton type="button" label="details" class="btn btn-default btn-sm"
+      (click)="dodajVakcine(x.id)"> Dodajte vakcinu psu </button>
+    <br/>
+      <table class="table table-striped" *ngIf="dogDetails.vakcine != ''">
+          <thead>
+              <tr>
+                
+                <th scope="col">Naziv vakcine</th>
+                <th scope="col">Primljena</th>
+              </tr>
+            </thead>
+          <tbody>
+            <tr *ngFor="let item of dogDetails.vakcine" >
+              <td>{{item.nazivVakcine}} </td>
+              <td>{{item.primljena | date:'dd.MM.y'}}</td>
+            </tr>
+          </tbody>
+        </table>
+    
+  </div>
+  <hr/>
+<br/>
+    <div class="p-3 mb-2 bg-danger text-white">
+
+        <p>
+            Pas je upisan u vrtić s periodom trajanja od mesec dana.
+            Ako nemate mogućnost da produžite, to je zato što nije istekao period koji ste uplatili.
+            Ako želite da promenite paket obratite se direktoru.
+        </p>
+      
+        <p> Čim period istekne imaćete mogućnost ponovnog uplaćivanja.</p>
+        <h6> Pas je upisan u vrtić zaključno sa {{dogDetails.endDate | date:'dd.MM.y'}} </h6>
+      
+      </div>
+
+   

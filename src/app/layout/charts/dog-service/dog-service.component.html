@@ -1,0 +1,66 @@
+<div class="container">
+    <div class="card mb-3">
+        <div class="card-header">
+            <p> 
+              Postoji mogućnost upisivanja psa u vremenskom periodu koji traje mesec dana. Dakle od trenutka izvršenja
+              plaćanja do kraja perioda u trajanju od 30 dana Vaš pas će moći da dolazi
+              u naš vrtić i o njemu čemo se brinuti u skladu sa opisom paketa koji ste kupili.
+              Kada istekne mesec dana možete psa ponovo upisati, ne morate da koristite isti paket.
+
+            </p>
+          <p>
+             U koliko želite da upišete vašeg psa u naš vrtić uplatite novac u iznosu od cene paketa. 
+
+          </p>
+          <p> 
+
+              <button type="button" class="btn btn-lg btn-block" (click)="backToDashboard()">Vratite se na početnu stranicu</button>
+          </p>
+          
+        </div></div>
+  
+    <div class="row">
+      <div class="col-sm">
+        <div class="col col-sm-14">
+          <div class="card mb-3">
+              <div class="card-header">
+                 {{data.serviceName}} 
+              </div>
+              <div class="card-body">
+                <p> {{data.description}}</p>
+                <p> Cena ovog paketa je {{data.price}}$</p> 
+                  
+              </div>
+              <div class="card-footer">
+                  {{data.price}}$
+              </div>
+              
+          </div>
+        <form [formGroup]="service.formModel" autocomplete="off" (submit)="onSubmit()">
+              <div class="form-group required">
+                  
+                  <div class="ui-g-12 ui-md-4">
+                      <label>Unesite cenu tacno onoliku kolika je cena paketa</label>
+                      <div class="ui-inputgroup">
+                          <span class="ui-inputgroup-addon">$</span>
+                          <input type="text" pInputText placeholder="Price" formControlName="Price">   
+                          <span class="ui-inputgroup-addon">.00</span>      
+                      </div>
+                      <label class="text-danger" *ngIf="service.formModel.get('Price').touched && service.formModel.get('Price').errors?.required">This
+                          field is mandatory.</label>
+                          <label class="text-danger" *ngIf="service.formModel.get('Price').touched 
+                          && service.formModel.get('Price').errors?.pattern">  U can anly tipe numbers</label>
+                  </div>
+                </div>
+              <div class="form-row">
+                <div class="form-group col-md-8 offset-md-2">
+                  <button type="submit" class="btn btn-lg btn-block" [disabled]="!service.formModel.valid">Kupi</button>
+                </div>
+              </div>
+            </form> 
+        
+      </div>
+      </div>
+      <p-toast position="center"></p-toast>
+    </div>
+  </div>
